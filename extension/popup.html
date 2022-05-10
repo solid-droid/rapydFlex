@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    Hello world
+  <div  class="head">
+    <div style="display: flex;">
+      <img src="./icon4.png" class="logo">
+      <div style="display: flex;flex-direction: column;justify-content: end;">
+        <div style="font-size: 33px;font-weight: 600;color: #373737;"> Rapyd Flex</div>
+        <div style="font-size: 11px;font-weight: 400;padding-left: 3px;">All In One Checkout Experience</div>
+      </div>
+    </div>
+    <div style="display: flex;align-items: center;" title="Flex Store">
+      <img src="./store.png" class="walletIcon">
+    </div>
+  </div>
+  <div class="body">
+      <div class="Menu">
+        <div class="headerCart">
+          <div>Shopping Cart</div>
+          <div id="itemCount">0</div>
+        </div>
+        <div class="buttons">
+          <div title="Past Orders" class="syncContainer">
+            <img src="./pastOrders.png" class="pastOrderIcon">
+          </div>
+          <div title="Sync with other devices" class="syncContainer">
+            <img src="./sync.png" class="syncIcon">
+          </div>
+        </div>
+
+
+      </div>
+      <div class="bodyWrapper">
+        <div id="cartItemsContainer">
+        </div>
+      </div>
+  </div>
+  <div class="footer">
+      <div class="payButton">
+        <div class="payButtonText">Pay 23,000 INR</div>
+      </div>
+  </div>
+  <script src="jquery.min.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>
+<!--  -->
