@@ -1,1 +1,50 @@
-<p>checkout works!</p>
+<div id="cartItemsContainer">
+    <div class="cartItem" *ngFor="let item of shoppingCart">
+        <div class="ItemWrapper">
+    
+            <div class="itemHeader">
+              <div class="itemName">{{item.productName}}</div>
+            </div>
+    
+            <div class="itemInfo">
+                <div class="itemImage" >
+                  <img [src]="item.productImage" alt="">
+                </div>
+                <div class="itemBodyWrapper">
+                  <div class="itemBody">
+                    
+                      <div class="itemSellerDetails">
+                        <div class="itemPriceDetails">
+                          <div class="currency">INR</div>
+                          <div class="itemPrice">{{item.productPrice}}</div>
+                          x
+                          <div class="itemQuantity">{{item.productQuantity}}</div>
+                        </div>
+                        <div class="shippingDetails">
+                          <div class="shippingIncluded">
+                          Shipping Included
+                          </div>
+                        </div>
+                    </div>
+                    <div class="totalPriceWrapper">
+                        <div class="TotalPrice">
+                          <div class="currency">INR</div>
+                          <div class="itemTotalPrice">{{item.productPrice * item.productQuantity}}</div>
+                        </div>
+                        <div class="itemActions">
+                        <!-- <div class="selectItem">Select</div> -->
+                          <div class="deleteItem">Delete</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="itemSellerName">
+                Sold by : 
+                <div class="sellerName">{{item.sellerName}}</div>
+                <div class="verifiedIcon"></div> 
+            </div>
+        </div>   
+    
+      </div>
+</div>

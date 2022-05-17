@@ -1,0 +1,22 @@
+.container{
+    height: 100%;
+    overflow: hidden;
+    .checkoutList{
+        background: #f3f3f3;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+        margin-left: 10px;
+        width: calc(60vw - 20px);
+
+        height: calc(100vh - 90px);
+    }
+}
+
+@media (max-width: 800px){
+    .container{
+        .checkoutList{
+            width: calc(100vw - 20px);
+        }
+    }
+}
