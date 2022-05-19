@@ -2,4 +2,26 @@
     <div class="checkoutList">
         <app-checkout></app-checkout>
     </div>
+    <div class="payMobile">
+        <div class="payButton" (click)="payNow=true">
+            Pay {{totalPrice}} {{currency}}
+        </div>
+    </div>
+    <div class="payDesktop">
+        <div class="helpNote">
+            Rapyd Secured Payment
+        </div>
+        <div class="helpNote">
+            30 day money back guarantee
+        </div>
+        <div class="analyticsContainer">
+            <!-- <app-analytics></app-analytics> -->
+        </div>
+        <div class="payButton" (click)="payNow=true">
+            Pay {{totalPrice}} {{currency}}
+        </div>
+    </div>
 </div>
+<p-sidebar [(visible)]="payNow" [fullScreen]="true" [baseZIndex]="10000">
+    <app-pay-details-popup></app-pay-details-popup>
+</p-sidebar>

@@ -17,6 +17,10 @@ import {MessageModule} from 'primeng/message';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {RippleModule} from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
+import { PayDetailsPopupComponent } from './components/pay-details-popup/pay-details-popup.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import {SidebarModule} from 'primeng/sidebar';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import { ToastModule } from 'primeng/toast';
     LoginComponent,
     RoutingControlComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    PayDetailsPopupComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,9 @@ import { ToastModule } from 'primeng/toast';
     MessageModule,
     ProgressSpinnerModule,
     RippleModule,
-    ToastModule
+    ToastModule,
+    SidebarModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

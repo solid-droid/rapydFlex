@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  totalPrice:number = 10000;
+  currency:string = 'USD';
+  payNow = false;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="wrapper">
+        <div class="currencyContainer item">
+            <div class="label">
+                Select your country:
+            </div>
+            <p-dropdown 
+            [options]="currencyOptions"
+            [(ngModel)]="selectedCurrency"
+            optionLabel="name">
+            </p-dropdown>
+        </div>
+        <div class="paymentContainer item">
+            <div class="label">
+                Select Payment Method:
+            </div>
+            <p-dropdown
+            [options]="paymentOptions"
+            [(ngModel)]="selectedPayment"
+            optionLabel="name"> 
+            </p-dropdown>
+        </div>
+        <div class="payButtonContainer">
+            <div class="payButton" (click)="createRapydPayment()">
+                Pay {{totalPrice}} {{currency}}
+            </div>
+        </div>
+
+    </div>
+
+</div>

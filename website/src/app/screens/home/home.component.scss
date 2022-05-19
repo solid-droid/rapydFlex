@@ -1,22 +1,83 @@
 .container{
-    height: 100%;
+    height: calc(100% - 10px);
     overflow: hidden;
+    display: grid;
+    grid-template-columns: 65vw 1fr;
     .checkoutList{
         background: #f3f3f3;
         border-radius: 10px;
         padding: 10px;
+        padding-left: 0;
         margin-top: 10px;
         margin-left: 10px;
-        width: calc(60vw - 20px);
+        width: calc(100% - 20px);
+        height: calc(100vh - 100px);
+    }
+    .payMobile{
+        display: none;
+        align-items: center;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    .payDesktop{
+        display: flex;
+        align-items: center;
+        padding-bottom: 20px;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        .payButton{
+            margin-bottom: 170px;
+        }
+    }
 
-        height: calc(100vh - 90px);
+    .payButton{
+        padding: 10px;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        background-color: #4e60ec;
+        border: 1px solid #f3f3f3;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover{
+            background-color: #3b4bc4;
+            transform: scale(1.05);
+        }
+    }
+
+    .helpNote{
+        font-size: 14px;
+        padding: 5px;
+        padding-top: 0;
     }
 }
 
-@media (max-width: 800px){
+@media (max-width: 600px){
     .container{
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: calc(100vh - 150px) 1fr;
         .checkoutList{
-            width: calc(100vw - 20px);
+            height: calc(100vh - 150px);
         }
+        .payMobile{
+            display: flex;
+        }
+        .payDesktop {
+            display: none;
+        }
+    }
+}
+
+::ng-deep{
+    .p-sidebar {
+        backdrop-filter: blur(3px);
+        background: #ffffff2e;
     }
 }
