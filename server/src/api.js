@@ -110,7 +110,6 @@ router.get('/connect', async (req,res)=>  await initFunction(res));
 
 async function initFunction(res = null) {
   console.log('Connecting to Database');
-  console.log(process.env.testing);
   mongoose.connect( process.env.MONGO_URI,() => {
       console.log('connected to mongoDB');
       if(res){
