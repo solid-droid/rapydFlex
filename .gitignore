@@ -10,7 +10,7 @@ website/bazel-out
 # dependencies
 website/node_modules
 server/node_modules
-
+.env
 # profiling files
 website/chrome-profiler-events*.json
 

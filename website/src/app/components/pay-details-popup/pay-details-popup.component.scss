@@ -1,0 +1,61 @@
+.container{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wrapper{
+        background: #f0f1f4;
+        padding: 20px;
+        border-radius: 10px;
+        border: solid 1px #d5d0d0;
+        display: grid;
+        grid-gap: 15px;
+        .item{
+            display: grid;
+            grid-template-columns: 1fr minmax(20vw , 1fr);
+            grid-gap: 10px;
+            align-items: center;
+            justify-items: center;
+            font-size: 13px;
+            .label{
+                width: 100%;
+            }
+        }
+        .payButtonContainer{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .payButton{
+                padding: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                background-color: #4e60ec;
+                border: 1px solid #f3f3f3;
+                border-radius: 5px;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                &:hover{
+                    background-color: #3b4bc4;
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+}
+
+::ng-deep{
+    .p-dropdown{
+        width: 20vw;
+        max-width: 200px;
+        min-width: 150px;
+        .p-dropdown-label {
+            font-size: 12px;
+        }
+    }
+}

@@ -1,0 +1,32 @@
+<p-toast></p-toast>
+<div class="container">
+    <div  class="head">
+        <div style="display: flex;">
+          <img src="./assets/icon4.png" class="logo">
+          <div style="display: flex;flex-direction: column;justify-content: end;">
+            <div style="font-size: 33px;font-weight: 600;color: #373737;"> Rapyd Flex</div>
+            <div style="font-size: 11px;font-weight: 400;padding-left: 3px;">All In One Checkout Experience</div>
+          </div>
+        </div>
+        <div class="menuButtonContainer">
+          <p-speedDial 
+            class="speedDial" 
+            [model]="items" 
+            direction="down"
+            showIcon="pi pi-ellipsis-v"
+            >
+          </p-speedDial>
+          <div class="menuButton" title="Sync">
+            Cart
+          </div>
+          <div class="menuButton" title="Flex Shop">
+            Shop
+          </div>
+          <div class="menuButton" title="Logout">
+            Logout
+          </div>
+        </div>
+
+      </div>
+</div>
+

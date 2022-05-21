@@ -1,0 +1,158 @@
+#cartItemsContainer{
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    .cartItem{
+        margin:10px;
+        padding: 5px;
+        box-shadow: 0px 0px 6px 1px #a4a4a4;
+        border-radius: 5px;
+        display: grid;
+        grid-gap:5px;
+        .ItemWrapper{
+         
+            .itemHeader{
+                margin-bottom: 2px;;
+                .itemName{
+                    box-shadow: 0 0 1px #8c8c8c;
+                    border-radius: 5px;
+                    padding: 5px;
+                    width: calc(100% - 6px);
+                    background: #e9eaec;
+                    font-size: 13px;
+                }
+            }   
+
+            
+            .itemInfo{
+                    display: grid;
+                    padding-top: 5px;
+                    grid-gap:5px;
+                    grid-template-columns: 100px calc(100% - 109px);
+                    .itemImage{
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        img{
+                            max-width: 100%;
+                        }
+                    }
+                    .itemBodyWrapper{
+                        display: grid;
+                        .itemBody{
+                            display: grid;
+                            grid-template-rows: 65px 1fr;
+                        
+                        }
+                    }
+                    .itemSellerDetails{
+                        display: flex;
+                        flex-direction: column;
+                        grid-gap: 5px;
+                        border-radius: 5px;
+                        padding: 5px;
+                        margin-bottom: 6px;
+                        margin-top: 1px;
+                        margin-left: 4px;
+                        box-shadow: 0 0 4px #b1b1b1;
+                    }
+
+                    .shippingDetails{
+                        display: flex;
+                        flex-direction: column;   
+                        justify-content: center;
+                        .shippingIncluded{
+                            display: flex;
+                            grid-gap:5px;
+                            align-items: baseline;
+                            font-size: 14px;
+                            .currency{
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                }
+
+            .itemSellerName{
+                display: flex;
+                grid-gap:5px;
+                font-size: 14px;
+            }
+
+            .totalPriceWrapper{
+                display: grid;
+                grid-template-columns: auto 60px;
+                grid-gap: 10px;
+                justify-content: right;
+                align-items: end;
+                padding-top: 20px;
+            }
+            
+           .TotalPrice ,.itemPriceDetails{
+            align-items: baseline;
+            display: flex;
+            grid-gap:5px;
+                .currency{
+                    font-size: 10px;
+                }
+           }
+           .TotalPrice{
+                justify-content: center;
+                align-items: baseline;
+                font-size: 16px;
+                height: auto;
+                padding: 5px;
+                border-radius: 5px;
+                box-shadow: 0 0 4px #4e60ec;
+                width: 100%;
+                padding-right: 20px;
+                padding-left: 20px;
+            }
+
+        .itemPriceDetails{
+            font-size: 14px;
+            .itemPrice{
+                margin-left: -3px;
+            }
+            align-items: baseline;
+            padding-top: 5px;
+        }
+        }
+
+
+        .itemActions{
+            display: flex;
+            grid-gap: 15px;
+            .selectItem{
+                cursor: pointer;
+                // background-color: #e6f3e5;
+                height: 20px;
+                width: 50px;
+                display: flex;
+                justify-content: center;
+                border-radius: 5px;
+                box-shadow: 0 0 3px 0px green;
+                align-items: center;
+                transition: 0.3s;
+                &:hover{
+                    background-color: #c9e5c7;
+                }
+            }
+            .deleteItem{
+                cursor: pointer;
+                height: 20px;
+                width: 100px;
+                display: flex;
+                justify-content: center;
+                border-radius: 5px;
+                align-items: center;
+                box-shadow: 0 0 3px 0px red;
+                transition: 0.3s;
+                &:hover{
+                    background-color: rgb(244, 181, 181);
+                }
+            }
+        }
+    }
+}
