@@ -15,8 +15,21 @@ export class CheckoutComponent implements OnInit {
 
   
   async ngOnInit() {
-    const data = await this.getData.getCart('nikhil.m.jeby@gmail.com');
-    this.loadShoppingCart(data.data);
+    const _email = this.getData.getUser();
+    if(_email){
+      const data = await this.getData.getCart(_email);
+      this.loadShoppingCart(data.data);
+      this.getData.showLogin = false;
+    }
+
+
+    this.getData.getLoginUser.subscribe(async (email:any) => {
+      if(email){
+          const data = await this.getData.getCart(email);
+          this.loadShoppingCart(data.data);
+      }
+    })
+
   }
 
   loadShoppingCart(data:any){

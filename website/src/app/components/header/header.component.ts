@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { GetDataService } from 'src/app/services/get-data/get-data.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,10 @@ import { MessageService } from 'primeng/api';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private messageService: MessageService) { }
+  constructor(
+    private messageService: MessageService,
+    private readonly getData: GetDataService,
+    ) { }
 
   items = [
     {
@@ -35,4 +39,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(){
+    localStorage.removeItem('user');
+    this.getData.showLogin = true;
+  }
 }

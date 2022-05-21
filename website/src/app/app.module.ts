@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,12 @@ import { PayDetailsPopupComponent } from './components/pay-details-popup/pay-det
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import {SidebarModule} from 'primeng/sidebar';
 import {DropdownModule} from 'primeng/dropdown';
+import { MessageService } from 'primeng/api';
+
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider} from 'angularx-social-login';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +39,8 @@ import {DropdownModule} from 'primeng/dropdown';
     HomeComponent,
     HeaderComponent,
     PayDetailsPopupComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -46,9 +54,25 @@ import {DropdownModule} from 'primeng/dropdown';
     RippleModule,
     ToastModule,
     SidebarModule,
-    DropdownModule
+    DropdownModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [   {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            environment.googleLogin
+          )
+        },
+      ]
+    } as SocialAuthServiceConfig,
+  },
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

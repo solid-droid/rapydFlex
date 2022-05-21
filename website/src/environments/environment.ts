@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  googleLogin : '419386531032-djlv53qm33oriacfu3n8u8jbgl4bk3a9.apps.googleusercontent.com',
   production: false,
   backendUrl:"http://localhost:9000/.netlify/functions/api/"
 };

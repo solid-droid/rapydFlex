@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class GetDataService {
   totalPrice:any = 0;
   totalPriceUSD:any = 0;
   paymentList:any = [];
+  showLogin = false;
   url = environment.backendUrl;
   body = {
     amount: 110,
@@ -33,6 +35,10 @@ export class GetDataService {
    createCheckout: () => '/v1/checkout',
    getDailyRates:(from:string,to:string) => `/v1/rates/daily?action_type=payment&buy_currency=${to}&fixed_side=buy&sell_currency=${from}`,
   }
+
+  private readonly Observable_loginUser:any = new BehaviorSubject(undefined);
+  getLoginUser = this.Observable_loginUser.asObservable();
+
   constructor() { }
 
   async fetchData(method:string, url:string, body={}){
@@ -53,6 +59,14 @@ export class GetDataService {
     return await (await fetch(this.url+'userCart/'+email,)).json();
   }
 
+  getUser(){
+    return localStorage.getItem('user');
+  }
+
+  setUser(email:string){
+    localStorage.setItem('user', email);
+    this.Observable_loginUser.next(email);
+  }
   async saveCart(cart:any){
     return await (await fetch(this.url+'userCart',{
         method: 'POST',

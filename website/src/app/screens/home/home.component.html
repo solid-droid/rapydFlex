@@ -25,3 +25,5 @@
 <p-sidebar [(visible)]="payNow" [fullScreen]="true" [baseZIndex]="10000">
     <app-pay-details-popup></app-pay-details-popup>
 </p-sidebar>
+
+<app-login *ngIf="getData.showLogin"></app-login>
