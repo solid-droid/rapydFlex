@@ -5,16 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class GetDataService {
 
-  url = "http://localhost:9000/.netlify/functions/api/api";
+  totalPrice:any = 0;
+  totalPriceUSD:any = 0;
+  paymentList:any = [];
+  url = "http://localhost:9000/.netlify/functions/api/";
   body = {
     amount: 110,
     country: 'IN',
     currency: 'INR',
-    payment_method_type_categories:['ewallet',
-     ],
+    payment_method_type_categories:['ewallet' ],
      ewallets:[
-        {ewallet : 'ewallet_b14d345b35efbe940ec12993103aafe9', amount: 50},
-        {ewallet : 'ewallet_fa5b17e3bd5f281e46422f9ec743b807', amount: 60},
+        {ewallet : 'ewallet_001', amount: 10},
+        {ewallet : 'ewallet_001', amount: 5},
+        {ewallet : 'ewallet_002', amount: 15},
      ],
     // requested_currency: 'USD',
     complete_checkout_url: 'https://rapyd-flex.netlify.app',
@@ -28,11 +31,12 @@ export class GetDataService {
    getCountries: () => '/v1/data/countries',
    getPayment_Methods: (country:string) => `/v1/payment_methods/country?country=${country}`,
    createCheckout: () => '/v1/checkout',
+   getDailyRates:(from:string,to:string) => `/v1/rates/daily?action_type=payment&buy_currency=${to}&fixed_side=buy&sell_currency=${from}`,
   }
   constructor() { }
 
   async fetchData(method:string, url:string, body={}){
-    return await(await fetch(this.url,{
+    return await(await fetch(this.url+'api',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,4 +49,35 @@ export class GetDataService {
     })).json();
 }
 
+  async getCart(email:string){
+    return await (await fetch(this.url+'userCart/'+email,)).json();
+  }
+
+  async saveCart(cart:any){
+    return await (await fetch(this.url+'userCart',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cart),
+    })).json();
+  }
+
+  async saveCheckout(checkout:any){
+    return await (await fetch(this.url+'checkout',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(checkout),
+    })).json();
+  }
+
+  async getCheckout(checkoutID:string){
+    return await (await fetch(this.url+'checkout/'+checkoutID,)).json();
+  }
+
+  async getCountries(){
+    return await this.fetchData('GET', this.urlMethods.getCountries());
+  }
 }

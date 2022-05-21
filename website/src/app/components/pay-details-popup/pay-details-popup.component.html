@@ -7,7 +7,10 @@
             <p-dropdown 
             [options]="currencyOptions"
             [(ngModel)]="selectedCurrency"
-            optionLabel="name">
+            [filter]=true
+            optionLabel="name"
+            (onChange)="onCurrencyChange()"
+            >
             </p-dropdown>
         </div>
         <div class="paymentContainer item">
@@ -22,7 +25,7 @@
         </div>
         <div class="payButtonContainer">
             <div class="payButton" (click)="createRapydPayment()">
-                Pay {{totalPrice}} {{currency}}
+                Pay {{getData.totalPrice}} {{selectedCurrency?.currency_code}}
             </div>
         </div>
 

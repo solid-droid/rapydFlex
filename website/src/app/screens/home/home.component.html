@@ -4,7 +4,7 @@
     </div>
     <div class="payMobile">
         <div class="payButton" (click)="payNow=true">
-            Pay {{totalPrice}} {{currency}}
+            Pay {{getData.totalPriceUSD}} {{currency}}
         </div>
     </div>
     <div class="payDesktop">
@@ -18,7 +18,7 @@
             <!-- <app-analytics></app-analytics> -->
         </div>
         <div class="payButton" (click)="payNow=true">
-            Pay {{totalPrice}} {{currency}}
+            Pay {{getData.totalPriceUSD}} {{currency}}
         </div>
     </div>
 </div>

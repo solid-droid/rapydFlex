@@ -3,6 +3,7 @@ require('dotenv').config();
 const serverless = require('serverless-http');
 const cors = require('cors');
 const makeRequest = require('./utilities.js').makeRequest;
+const methods = require('./methods.js');
 const app = express();
 const router = express.Router();
 app.use(express.json());
@@ -36,6 +37,74 @@ router.post('/api', async (req, res) => {
         res.json(error);
       }
 });
+
+router.post('/checkout', async (req, res) => {
+  try {
+    initFunction();
+    const result = await methods.saveCheckout(req.params, req.body);
+    res.json(result);
+
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+router.post('/store', async (req, res) => {
+  try {
+    initFunction();
+    const result = await methods.saveStore(req.params, req.body);
+    res.json(result);
+
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+router.post('/userCart', async (req, res) => {
+  try {
+    initFunction();
+    const result = await methods.saveUserCart(req.params, req.body);
+    res.json(result);
+
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+router.get('/userCart/:email', async (req, res) => {
+  try {
+    initFunction();
+    const result = await methods.getUserCart(req.params, req.body);
+    res.json(result);
+
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+router.get('/checkout/:checkoutID', async (req, res) => {
+  try {
+    initFunction();
+    const result = await methods.getCheckout(req.params, req.body);
+    res.json(result);
+
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+
+router.get('/store/:storeID', async (req, res) => {
+  try {
+    initFunction();
+    const result = await methods.getStore(req.params, req.body);
+    res.json(result);
+
+  } catch (error) {
+    res.json(error);
+  }
+});
+
 
 router.get('/connect', async (req,res)=>  await initFunction(res));
 

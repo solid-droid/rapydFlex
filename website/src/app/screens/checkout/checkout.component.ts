@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetDataService } from 'src/app/services/get-data/get-data.service';
 
 @Component({
   selector: 'app-checkout',
@@ -8,56 +9,34 @@ import { Component, OnInit } from '@angular/core';
 export class CheckoutComponent implements OnInit {
   shoppingCart:any = [];
 
-  constructor() { }
+  constructor(
+    private readonly getData: GetDataService,
+  ) { }
 
   
-  ngOnInit() {
-    this.loadShoppingCart();
+  async ngOnInit() {
+    const data = await this.getData.getCart('nikhil.m.jeby@gmail.com');
+    this.loadShoppingCart(data.data);
   }
 
-  loadShoppingCart(){
-    const data = {
-      "productName": "INICIO Mini DisplayPort to Display Port Cable 3.3ft/1m Mini DP to DP Adapter 4K@60Hz 2K@144Hz Compatible for MacBook Air Pro (Before 2016) Surface Pro Dock HP Lenovo etc",
-      "productPrice": "10005",
-      "productQuantity": "10",
-      "productImage": "https://m.media-amazon.com/images/I/61jAM2SNesL._SX425_.jpg",
-      "productDescription": "INICIO Mini DisplayPort to Display Port Cable 3.3ft/1m Mini DP to DP Adapter 4K@60Hz 2K@144Hz Compatible for MacBook Air Pro (Before 2016) Surface Pro Dock HP Lenovo etc",
-      "productCode": "1234",
-      "productURL": "https://www.amazon.in/gp/product/B09V182FTY/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1",
-      "productCategory": "Electronics",
-      "productSubCategory": "Cables",
-  
-      "sellerCode": "1112",
-      "sellerName": "Amazon",
-      "sellerVerified": "true",
-      "sellerRating": "4.5",
-      "sellerWalletIDs": [
-        {wallet: "ewallet_fa5b17e3bd5f281e46422f9ec743b807", amount: "100", seller: true},
-        {wallet:"ewallet_f723844735036650050469453ac0e413", amount: "5", seller: false}
-      ],
-      "sellerSupportLink": "https://www.amazon.in/",
-      "shippingAddress": {
-        "addressLine1": "Flat No. 1, Building No. 1, Sector 1, Pocket 1,",
-        "addressLine2": "Gurgaon, Haryana 122001",
-        "state": "Haryana",
-        "country": "India",
-        "pinCode": "122001",
-        "phoneNumber": "9876543210",
-        "email": "xyz@gmail.com",
-      },
-      "shippingCharges": "0",
-      "shippingAddressAvailable": "true",
-      "shippingAddressNeeded": "true",
-      "editShipping": "true",
-    }
-  
-    this.shoppingCart.push(data);
-    const newData = {...data};
-    newData.productName = "hello world"
-    this.shoppingCart.push(newData);
-    this.shoppingCart.push(newData);
-    this.shoppingCart.push(newData);
-    this.shoppingCart.push(newData);
+  loadShoppingCart(data:any){
+    this.shoppingCart = data.cart;
+    const totalPrice = this.shoppingCart.map((item:any) => item.productPrice*item.productQuantity).reduce((a:any, b:any) => a + b, 0);
+    this.getData.totalPriceUSD = totalPrice;
+
+    //loading seller wallets.
+    const paymentObj:any = {};
+    this.shoppingCart
+    .map((item:any) => item.sellerWalletIDs)
+    .flat()
+    .map((item:any) => ({ewallet :item.wallet , amount: item.amount}))
+    .forEach((item:any) => {
+      if(!paymentObj[item.ewallet]){
+        paymentObj[item.ewallet] = 0;
+      } 
+      paymentObj[item.ewallet] += parseFloat(item.amount);
+    });
+    this.getData.paymentList = Object.keys(paymentObj).map((item:any) => ({ewallet:item, amount: String(paymentObj[item])}));
   }
-  
+
 }

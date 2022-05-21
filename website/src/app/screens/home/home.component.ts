@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetDataService } from 'src/app/services/get-data/get-data.service';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  totalPrice:number = 10000;
   currency:string = 'USD';
   payNow = false;
-  constructor() { }
+  constructor(
+    public readonly getData: GetDataService,
+  ) { }
 
   ngOnInit(): void {
   }
