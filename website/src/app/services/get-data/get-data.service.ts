@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +8,7 @@ export class GetDataService {
   totalPrice:any = 0;
   totalPriceUSD:any = 0;
   paymentList:any = [];
-  url = "http://localhost:9000/.netlify/functions/api/";
+  url = environment.backendUrl;
   body = {
     amount: 110,
     country: 'IN',
