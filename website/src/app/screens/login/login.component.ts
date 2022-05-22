@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         }
         this.hidePopup();
       }).catch(() => { 
-        alert('something went wrong. please refresh.');
+        alert('something went wrong. please try again.');
        });
 
   }

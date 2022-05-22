@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { GetDataService } from 'src/app/services/get-data/get-data.service';
 
@@ -12,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
+    private router: Router,
     private readonly getData: GetDataService,
     ) { }
 
@@ -19,19 +21,27 @@ export class HeaderComponent implements OnInit {
     {
       icon: 'pi pi-sign-out',
       command: () => {
-          this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+         this.logout();
+      }
+    },
+    {
+      icon: 'pi pi-book',
+      command: () => {
+          this.pastOrders();  
+        // this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
       }
     },
     {
         icon: 'pi pi-shopping-cart',
         command: () => {
-            this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+            this.loadHome();
         }
     },
     {
         icon: 'pi pi-shopping-bag',
         command: () => {
-            this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+            this.loadShop();  
+          // this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
         }
     }
 ];
@@ -42,5 +52,17 @@ export class HeaderComponent implements OnInit {
   logout(){
     localStorage.removeItem('user');
     this.getData.showLogin = true;
+  }
+
+  loadHome(){
+    this.router.navigate(['']);
+  }
+
+  loadShop(){
+    this.router.navigate(['flexshop']);
+  }
+
+  pastOrders(){
+    this.router.navigate(['pastorders']);
   }
 }

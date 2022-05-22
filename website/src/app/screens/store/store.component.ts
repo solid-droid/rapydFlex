@@ -9,7 +9,12 @@ export class StoreComponent implements OnInit {
 
   constructor() { }
 
+  url = '';
   ngOnInit(): void {
+    this.url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   }
 
+  publish() {
+    this.url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  }
 }

@@ -1,1 +1,59 @@
-<p>store works!</p>
+<div class="container">
+    <div class="wrapper">
+        <div class="header">
+            <div class="label">
+                Shop Creator
+            </div>
+            <div class="publish">
+                <button pButton type="button" label="Publish" (click)="publish()" ></button>
+            </div>
+            <div class="url"> {{url}}</div>
+        </div>
+        <div>
+
+        </div>
+        <div class="inputFields">
+            <!-- 
+              "productName"
+              "productPrice"
+              "productImage"
+              "sellerName"
+	          "SellerWallet"
+              "Support Link"
+	          "affiliatePercent"
+             -->
+             <span class="p-float-label">
+                <input id="float-input" type="text" pInputText> 
+                <label for="float-input">Product Name</label>
+            </span>
+            <span class="p-float-label">
+                <input id="float-input" type="number" pInputText> 
+                <label for="float-input">Product Price (in USD)</label>
+            </span>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText> 
+                <label for="float-input">Product Image URL</label>
+            </span>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText> 
+                <label for="float-input">Product URL</label>
+            </span>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText> 
+                <label for="float-input">Seller Name</label>
+            </span>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText> 
+                <label for="float-input">Rapyd Wallet Address</label>
+            </span>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText> 
+                <label for="float-input">Support Link</label>
+            </span>
+            <span class="p-float-label">
+                <input id="float-input" type="number" pInputText> 
+                <label for="float-input">Affiliate Percent</label>
+            </span>
+        </div>
+    </div>
+</div>

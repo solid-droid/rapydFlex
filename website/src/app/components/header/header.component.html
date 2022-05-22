@@ -16,11 +16,14 @@
             showIcon="pi pi-ellipsis-v"
             >
           </p-speedDial>
-          <div class="menuButton" title="Sync">
+          <div class="menuButton" title="Sync" (click)="loadHome()">
             Cart
           </div>
-          <div class="menuButton" title="Flex Shop">
+          <div class="menuButton" title="Flex Shop" (click)="loadShop()">
             Shop
+          </div>
+          <div class="menuButton" title="Past Orders" (click)="pastOrders()">
+            Orders
           </div>
           <div class="menuButton" title="Logout" (click)="logout()">
             Logout

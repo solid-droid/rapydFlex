@@ -1,4 +1,7 @@
 <div id="cartItemsContainer">
+  <div *ngIf="shoppingCart.length === 0" style="margin:20px">
+      Your Cart is Empty
+  </div>
     <div class="cartItem" *ngFor="let item of shoppingCart">
         <div class="ItemWrapper">
     

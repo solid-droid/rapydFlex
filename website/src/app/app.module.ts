@@ -23,7 +23,8 @@ import { AnalyticsComponent } from './components/analytics/analytics.component';
 import {SidebarModule} from 'primeng/sidebar';
 import {DropdownModule} from 'primeng/dropdown';
 import { MessageService } from 'primeng/api';
-
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
@@ -45,6 +46,8 @@ import { GoogleLoginProvider} from 'angularx-social-login';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    InputTextModule,
+    ButtonModule,
     SpeedDialModule,
     BrowserAnimationsModule,
     FormsModule,

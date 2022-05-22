@@ -1,4 +1,4 @@
-<div class="container">
+<div class="cartContainer" *ngIf="showCart">
     <div class="checkoutList">
         <app-checkout></app-checkout>
     </div>
@@ -21,6 +21,14 @@
             Pay {{getData.totalPriceUSD}} {{currency}}
         </div>
     </div>
+</div>
+
+<div class="orderContainer" *ngIf="showPastOrders">
+    Past Orders
+</div>
+
+<div class="shopContainer" *ngIf="showShop">
+    <app-store></app-store>
 </div>
 <p-sidebar [(visible)]="payNow" [fullScreen]="true" [baseZIndex]="10000">
     <app-pay-details-popup></app-pay-details-popup>

@@ -1,4 +1,4 @@
-.container{
+.cartContainer{
     height: calc(100% - 10px);
     overflow: hidden;
     display: grid;
@@ -59,8 +59,11 @@
     }
 }
 
+.shopContainer{
+    max-width: calc(100vw - 10px);
+}
 @media (max-width: 600px){
-    .container{
+    .cartContainer{
         display: grid;
         grid-template-columns: none;
         grid-template-rows: calc(100vh - 150px) 1fr;

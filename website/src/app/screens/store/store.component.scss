@@ -1,0 +1,61 @@
+.container{
+    height: calc(100vh - 82px);
+    padding: 10px;
+    .wrapper{
+        background-color: #f1f1f1;
+        height: 100%;
+        border: solid 1px #dfdfdf;
+        border-radius: 5px;
+        padding: 5px;
+        .header{
+            font-size: 20px;
+            font-weight: bold;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            grid-gap: 20px;
+            .url{
+                font-size: 13px;
+                cursor: pointer;
+                overflow: hidden;
+                font-weight: normal;
+                word-break: break-all;
+                &:hover{
+                    text-decoration: underline;
+                    color:rgb(41, 41, 123);
+                }
+            }
+        }
+        .inputFields{
+            margin-top: 5px;
+            padding-top: 20px;
+            display: grid;
+            grid-gap:25px;
+            overflow: auto;
+            height: calc(100% - 40px);
+            input{
+                width:calc(100% - 50px);
+            }
+        }
+    }
+}
+
+@media  (max-width: 600px){
+    .container{
+        .wrapper{
+            .inputFields{
+                input{
+                    width:calc(100% - 10px);
+                }
+            }
+        }
+    }
+
+}
+
+::ng-deep{
+    .p-button{
+        height: 35px;
+        padding: 10px;
+    }
+}

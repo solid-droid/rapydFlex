@@ -41,6 +41,9 @@ export class GetDataService {
   private readonly Observable_loginUser:any = new BehaviorSubject(undefined);
   getLoginUser = this.Observable_loginUser.asObservable();
 
+  private readonly Observable_route:any = new BehaviorSubject({type:null,id:null});
+  getRoute = this.Observable_route.asObservable();
+
   constructor() { }
 
   async fetchData(method:string, url:string, body={}){
@@ -65,6 +68,9 @@ export class GetDataService {
     return localStorage.getItem('user');
   }
 
+  setRoute(type:any , id:any){
+    this.Observable_route.next({type,id});
+  }
   setUser(email:string){
     localStorage.setItem('user', email);
     this.Observable_loginUser.next(email);

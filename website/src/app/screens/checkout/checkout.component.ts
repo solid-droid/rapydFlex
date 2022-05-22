@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GetDataService } from 'src/app/services/get-data/get-data.service';
 
 @Component({
@@ -6,15 +6,26 @@ import { GetDataService } from 'src/app/services/get-data/get-data.service';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
   shoppingCart:any = [];
 
+  $subscription1:any;
+  
   constructor(
     private readonly getData: GetDataService,
   ) { }
 
+  ngOnDestroy() {
+   this.$subscription1?.unsubscribe();
+  }
+
   
-  async ngOnInit() {
+  ngOnInit() {
+    // this.beginSubscriptions();
+
+  }
+
+  async beginSubscriptions(){
     const _email = this.getData.getUser();
     if(_email){
       const data = await this.getData.getCart(_email);
@@ -25,13 +36,12 @@ export class CheckoutComponent implements OnInit {
     }
 
 
-    this.getData.getLoginUser.subscribe(async (email:any) => {
+    this.$subscription1 = this.getData.getLoginUser.subscribe(async (email:any) => {
       if(email){
           const data = await this.getData.getCart(email);
           this.loadShoppingCart(data.data);
       }
     })
-
   }
 
   async loadShoppingCart(data:any){
