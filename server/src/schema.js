@@ -11,6 +11,10 @@ const userCart = new mongoose.Schema({
     cart : {
         type: Array,
         default: []
+    },
+    timestap:{
+        type: Date,
+        default: Date.now
     }
 });
 
@@ -27,6 +31,14 @@ const checkOuts = new mongoose.Schema({
         type: Array,
         default: []
     },
+    status:{
+        type: String,
+        default:'pending'
+    },
+    timestap:{
+        type: Date,
+        default: Date.now
+    }
 });
 
 

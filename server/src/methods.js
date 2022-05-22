@@ -1,15 +1,16 @@
 const table = require('./schema.js');
 
 const saveUserCart = async (params, body) => {
-    const record = (await table.userCart.find({email:body.email}))[0];
+    //add current timestamp
+    const data = {...body, timestap:new Date()};
+    const record = (await table.userCart.find({email:data.email}))[0];
     if(record){
-        await table.userCart.findOneAndUpdate({email:body.email}, body);
-        return {success: true, data: body};
+        await table.userCart.findOneAndReplace({email:data.email}, data);
     }else{
-        //create new
-        await (new table.userCart(body)).save();
-        return {success: true, data: body};
+        await table.userCart.create(data);
     }
+
+    return {success: true, data};
 };
 
 
@@ -23,16 +24,20 @@ const getUserCart = async (params, body) => {
 };
 
 const saveCheckout = async (params, body) => {
-    const record = (await table.checkOuts.find({checkoutId:body.checkoutId}))[0];
+    const data = {...body, timestap:new Date()};
+     //markmodified create or update
+    const record = (await table.checkOuts.find({checkoutId:data.checkoutId}))[0];
     if(record){
-        await table.checkOuts.findOneAndUpdate({checkoutId:body.checkoutId}, body);
-        return {success: true, data: body};
+        if(!data.updateCart){
+            data.cart = record.cart;
+        }
+        delete data.updateCart;
+        await table.checkOuts.findOneAndReplace({checkoutId:data.checkoutId}, data);
     }else{
-        //create new
-        await (new table.checkOuts(body)).save();
-        return {success: true, data: body};
+        delete data.updateCart;
+        await table.checkOuts.create(data);
     }
-
+    return {success: true, data: body};
 };
 
 const saveStore = async (params, body) => {

@@ -10,6 +10,7 @@ export class GetDataService {
   totalPriceUSD:any = 0;
   paymentList:any = [];
   showLogin = false;
+  cartData:any = {};
   url = environment.backendUrl;
   body = {
     amount: 110,
@@ -33,6 +34,7 @@ export class GetDataService {
    getCountries: () => '/v1/data/countries',
    getPayment_Methods: (country:string) => `/v1/payment_methods/country?country=${country}`,
    createCheckout: () => '/v1/checkout',
+   getCheckoutStatus: (checkoutID:string) => `/v1/checkout/${checkoutID}`,
    getDailyRates:(from:string,to:string) => `/v1/rates/daily?action_type=payment&buy_currency=${to}&fixed_side=buy&sell_currency=${from}`,
   }
 
@@ -77,18 +79,33 @@ export class GetDataService {
     })).json();
   }
 
-  async saveCheckout(checkout:any){
+  async saveCheckout(checkoutId:string,status:string = 'pending' , updateCart = true){
+    if(updateCart){
+      this.cartData.checkOuts.push({checkoutId, status: 'pending'});
+      await this.saveCart(this.cartData);
+    }
+    const body = {
+      checkoutId,
+      userID:this.cartData.email,
+      cart:this.cartData.cart,
+      status,
+      updateCart
+    };
     return await (await fetch(this.url+'checkout',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(checkout),
+        body: JSON.stringify(body),
     })).json();
   }
 
   async getCheckout(checkoutID:string){
     return await (await fetch(this.url+'checkout/'+checkoutID,)).json();
+  }
+
+  async getCheckoutStatus(checkoutID:string){
+    return await this.fetchData('GET',this.urlMethods.getCheckoutStatus(checkoutID));
   }
 
   async getCountries(){

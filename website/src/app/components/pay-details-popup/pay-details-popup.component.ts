@@ -62,22 +62,9 @@ export class PayDetailsPopupComponent implements OnInit {
       // escrow: true,
       // escrow_release_days: 2,
     };
-    console.log(body);
     const data = await this.getData.fetchData(method, url , body);
-    console.log(data);
     const {redirect_url, id} = data.body.data;
+    await this.getData.saveCheckout(id);
     document.location.href = redirect_url;
-    // this.getCheckoutStatus();
-  }
-  
-
-  async getCheckoutStatus(){
-    const method = 'GET';
-    const id = 'checkout_4e97851266967fc3767a66373b826dd7';
-    const url = this.getData.urlMethods.createCheckout()+'/'+id;    
-    const data = await this.getData.fetchData(method, url);
-    console.log(url);
-    console.log(data);
-
   }
 }
