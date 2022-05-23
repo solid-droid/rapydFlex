@@ -10,7 +10,8 @@ export class GetDataService {
   totalPriceUSD:any = 0;
   paymentList:any = [];
   showLogin = false;
-  cartData:any = {};
+  cartData:any = undefined;
+  checkoutLoadingCompleted = false;
   url = environment.backendUrl;
   body = {
     amount: 110,
@@ -41,6 +42,9 @@ export class GetDataService {
   private readonly Observable_loginUser:any = new BehaviorSubject(undefined);
   getLoginUser = this.Observable_loginUser.asObservable();
 
+  private readonly Observable_price:any = new BehaviorSubject({type:null,id:null});
+  getPrice = this.Observable_price.asObservable();
+
   private readonly Observable_route:any = new BehaviorSubject({type:null,id:null});
   getRoute = this.Observable_route.asObservable();
 
@@ -64,6 +68,10 @@ export class GetDataService {
     return await (await fetch(this.url+'userCart/'+email,)).json();
   }
 
+  setPrice(){
+    this.Observable_price.next(this.totalPriceUSD);
+  }
+
   getUser(){
     return localStorage.getItem('user');
   }
@@ -83,6 +91,20 @@ export class GetDataService {
         },
         body: JSON.stringify(cart),
     })).json();
+  }
+
+  async saveStore(storeDetails:any){
+    return await (await fetch(this.url+'store',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(storeDetails),
+    })).json();
+  };
+
+  async getShop(shopID:string){
+    return await (await fetch(this.url+'store/'+shopID,)).json();
   }
 
   async saveCheckout(checkoutId:string,status:string = 'pending' , updateCart = true){

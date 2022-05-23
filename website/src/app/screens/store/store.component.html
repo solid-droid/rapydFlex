@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="container">
     <div class="wrapper">
         <div class="header">
@@ -23,36 +24,36 @@
 	          "affiliatePercent"
              -->
              <span class="p-float-label">
-                <input id="float-input" type="text" pInputText> 
-                <label for="float-input">Product Name</label>
+                <input id="productName" type="text"   [(ngModel)]="productName"  pInputText> 
+                <label for="productName">Product Name</label>
             </span>
             <span class="p-float-label">
-                <input id="float-input" type="number" pInputText> 
-                <label for="float-input">Product Price (in USD)</label>
+                <input id="productPrice" type="number" [(ngModel)]="productPrice" min="1" pInputText>
+                <label for="productPrice">Product Price (in USD)</label>
             </span>
             <span class="p-float-label">
-                <input id="float-input" type="text" pInputText> 
-                <label for="float-input">Product Image URL</label>
+                <input id="productImage" type="text"  [(ngModel)]="productImage"  pInputText> 
+                <label for="productImage">Product Image URL</label>
             </span>
             <span class="p-float-label">
-                <input id="float-input" type="text" pInputText> 
-                <label for="float-input">Product URL</label>
+                <input id="productUrl" type="text"  [(ngModel)]="productUrl"  pInputText> 
+                <label for="productUrl">Product URL</label>
             </span>
             <span class="p-float-label">
-                <input id="float-input" type="text" pInputText> 
-                <label for="float-input">Seller Name</label>
+                <input id="sellerName" type="text"  [(ngModel)]="sellerName"  pInputText> 
+                <label for="sellerName">Seller Name</label>
             </span>
             <span class="p-float-label">
-                <input id="float-input" type="text" pInputText> 
-                <label for="float-input">Rapyd Wallet Address</label>
+                <input id="rapydWallet" type="text"  [(ngModel)]="rapydWallet"  pInputText> 
+                <label for="rapydWallet">Rapyd Wallet Address</label>
             </span>
             <span class="p-float-label">
-                <input id="float-input" type="text" pInputText> 
-                <label for="float-input">Support Link</label>
+                <input id="supportLink" type="text" [(ngModel)]="supportLink"  pInputText> 
+                <label for="supportLink">Support Link</label>
             </span>
             <span class="p-float-label">
-                <input id="float-input" type="number" pInputText> 
-                <label for="float-input">Affiliate Percent</label>
+                <input id="affiliatePercent" type="number"  [(ngModel)]="affiliatePercent" min="1" max="99" pInputText>
+                <label for="affiliatePercent">Affiliate Percent</label>
             </span>
         </div>
     </div>

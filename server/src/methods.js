@@ -41,8 +41,13 @@ const saveCheckout = async (params, body) => {
 };
 
 const saveStore = async (params, body) => {
-
-
+    let data = {...body, timestap:new Date()};
+    if(data._id){
+        data = await table.store.findOneAndReplace({_id:data._id}, data);
+    } else {
+        data = await table.store.create(data);
+    }
+    return {success: true, data: data};
 };
 
 
@@ -59,6 +64,12 @@ const getCheckout = async (params, body) => {
 
 
 const getStore = async (params, body) => {
+    const record = (await table.store.find({_id:params.storeID}))[0];
+    if(record){
+        return {success: true, data: record};
+    }else{
+        return {success: false, data: null};
+    }
 
 
 };

@@ -1,8 +1,8 @@
 <div id="cartItemsContainer">
-  <div *ngIf="shoppingCart.length === 0" style="margin:20px">
+  <div *ngIf="getData.cartData?.cart?.length || 0 === 0" style="margin:20px">
       Your Cart is Empty
   </div>
-    <div class="cartItem" *ngFor="let item of shoppingCart">
+    <div class="cartItem" *ngFor="let item of getData?.cartData?.cart || []">
         <div class="ItemWrapper">
     
             <div class="itemHeader">
@@ -21,7 +21,14 @@
                           <div class="currency">USD</div>
                           <div class="itemPrice">{{item.productPrice}}</div>
                           x
-                          <div class="itemQuantity">{{item.productQuantity}}</div>
+                          <input type="number" 
+                                 style="width: 75px;
+                                        height: 25px;" 
+                                 [(ngModel)]="item.productQuantity" 
+                                 min="1" 
+                                 oninput="this.value = Math.round(this.value);" 
+                                 (change)="updatePayment()"
+                          pInputText />
                         </div>
                         <div class="shippingDetails">
                           <div class="shippingIncluded">

@@ -28,7 +28,7 @@ import {ButtonModule} from 'primeng/button';
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
-
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { GoogleLoginProvider} from 'angularx-social-login';
     BrowserModule,
     AppRoutingModule,
     InputTextModule,
+    KeyFilterModule,
     ButtonModule,
     SpeedDialModule,
     BrowserAnimationsModule,

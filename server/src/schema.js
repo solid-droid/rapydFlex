@@ -41,8 +41,54 @@ const checkOuts = new mongoose.Schema({
     }
 });
 
+const store = new mongoose.Schema({
+    productName:{
+        type: String,
+        required: true
+    },
+    productPrice:{
+        type: Number,
+        required: true
+    },
+    productImage:{
+        type: String,
+        required: true
+    },
+    productURL:{
+        type: String,
+    },
+    sellerName:{
+        type: String,
+        required: true
+    },
+    sellerEmail:{
+        type: String,
+        required: true
+    },
+    rapydWallet:{
+        type: String,
+        required: true
+    },
+    supportLink:{
+        type: String,
+    },
+    timestap:{
+        type: Date,
+        default: Date.now
+    },
+    affiliatePercent:{
+        type: Number,
+        default: 0
+    },
+    active:{
+        type: Boolean,
+        default: true
+    }
+});
+
 
 module.exports = {
     userCart   :   mongoose.model('UserCart', userCart),
     checkOuts  :   mongoose.model('CheckOuts', checkOuts),
+    store      :   mongoose.model('Store', store),
 };

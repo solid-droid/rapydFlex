@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GetDataService } from 'src/app/services/get-data/get-data.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { GetDataService } from 'src/app/services/get-data/get-data.service';
   templateUrl: './pay-details-popup.component.html',
   styleUrls: ['./pay-details-popup.component.scss']
 })
-export class PayDetailsPopupComponent implements OnInit {
+export class PayDetailsPopupComponent implements OnInit,OnDestroy {
   currencyOptions:any = [];
   selectedCurrency:any ;
   rate:any = 1;
@@ -18,10 +18,13 @@ export class PayDetailsPopupComponent implements OnInit {
   ];
   selectedPayment:any;
   currency = 'USD';
-
+  $subscription1:any;
   constructor(
     public readonly getData:GetDataService
   ) { }
+  ngOnDestroy() {
+    this.$subscription1?.unsubscribe();
+  }
 
   async ngOnInit(){
     const countryList = await this.getData.fetchData('GET', this.getData.urlMethods.getCountries() );
@@ -37,7 +40,9 @@ export class PayDetailsPopupComponent implements OnInit {
       "currency_sign": "$",
       "phone_code": "1"
   };
+  this.$subscription1 = this.getData.getPrice.subscribe((price:any) => {
     this.getData.totalPrice = this.getData.totalPriceUSD;
+  });
   }
   async onCurrencyChange(){
     const result = await this.getData.fetchData('GET', this.getData.urlMethods.getDailyRates('USD',this.selectedCurrency.currency_code) );

@@ -7,12 +7,10 @@ import { GetDataService } from 'src/app/services/get-data/get-data.service';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
-  shoppingCart:any = [];
-
   $subscription1:any;
   
   constructor(
-    private readonly getData: GetDataService,
+    public readonly getData: GetDataService,
   ) { }
 
   ngOnDestroy() {
@@ -21,7 +19,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   
   ngOnInit() {
-    // this.beginSubscriptions();
+    this.beginSubscriptions();
 
   }
 
@@ -46,8 +44,15 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   async loadShoppingCart(data:any){
     ////////CheckoutStatus///////////////
+    this.getData.checkoutLoadingCompleted = false;
+    if(!data){
+      data = {
+        cart: [],
+        checkOuts: [],
+        email: this.getData.getUser()
+      }
+    }
     this.getData.cartData = data;
-
     const pendingItems = data.checkOuts.filter((item:any) => item.status !== 'CLO');
     for(let i =0; i<pendingItems.length; i++){
       const checkout = await this.getData.getCheckoutStatus(pendingItems[i].checkoutId);
@@ -65,13 +70,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.getData.cartData = data;
     await this.getData.saveCart(this.getData.cartData);
     ///////////////////////
-    this.shoppingCart = data.cart.map((x:any,i:number)=>({...x,id:i}));
-    const totalPrice = this.shoppingCart.map((item:any) => item.productPrice*item.productQuantity).reduce((a:any, b:any) => a + b, 0);
-    this.getData.totalPriceUSD = totalPrice;
+     this.updatePayment();
+    this.getData.checkoutLoadingCompleted = true;
+  }
 
+  async deleteEntry(entry:any){
+    this.getData.cartData.cart = this.getData.cartData.cart.filter((item:any) => item.id !== entry.id);
+    await this.getData.saveCart(this.getData.cartData);
+  }
+
+  updatePayment(){
+    const totalPrice = this.getData.cartData.cart.map((item:any) => item.productPrice*item.productQuantity).reduce((a:any, b:any) => a + b, 0);
+    this.getData.totalPriceUSD = totalPrice;
+    this.getData.setPrice();
     //loading seller wallets.
     const paymentObj:any = {};
-    this.shoppingCart
+    this.getData.cartData.cart
     .map((item:any) => item.sellerWalletIDs)
     .flat()
     .map((item:any) => ({ewallet :item.wallet , amount: item.amount}))
@@ -82,16 +96,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       paymentObj[item.ewallet] += parseFloat(item.amount);
     });
     this.getData.paymentList = Object.keys(paymentObj).map((item:any) => ({ewallet:item, amount: String(paymentObj[item])}));
-  }
-
-  async deleteEntry(entry:any){
-    this.shoppingCart = this.shoppingCart.filter((item:any) => item.id !== entry.id);
-    this.getData.cartData.cart = this.shoppingCart.map((item:any) => {
-      const data = {...item}
-      delete data.id;
-      return data;
-    });
-    await this.getData.saveCart(this.getData.cartData);
   }
 
 }
