@@ -10,6 +10,7 @@ export class PayDetailsPopupComponent implements OnInit,OnDestroy {
   currencyOptions:any = [];
   selectedCurrency:any ;
   rate:any = 1;
+  disablePay = false;
   paymentOptions:any = [
             {name:'Bank Transfer',value:'bank_transfer'},
             {name:'E-wallet',value:'ewallet'},
@@ -41,35 +42,39 @@ export class PayDetailsPopupComponent implements OnInit,OnDestroy {
       "phone_code": "1"
   };
   this.$subscription1 = this.getData.getPrice.subscribe((price:any) => {
-    this.getData.totalPrice = this.getData.totalPriceUSD;
+    this.getData.totalPrice = this.getData.totalPriceUSD.toFixed(2);
   });
   }
   async onCurrencyChange(){
+    this.disablePay = true;
     const result = await this.getData.fetchData('GET', this.getData.urlMethods.getDailyRates('USD',this.selectedCurrency.currency_code) );
     this.rate = result?.body?.data?.rate || 1;
     this.getData.totalPrice =parseFloat(String( this.rate * this.getData.totalPriceUSD)).toFixed(2);
+    this.disablePay = false;
 
   }
   async createRapydPayment(){
-    const method = 'POST';
-    const url = this.getData.urlMethods.createCheckout();
-    const body = {
-      amount: this.getData.totalPrice ,
-      country: this.selectedCurrency.iso_alpha2,
-      currency: this.selectedCurrency.currency_code,
-      payment_method_type_categories:[this.selectedPayment.value],
-      //convert rate
-      ewallets: this.getData.paymentList.map((item:any) => ({ewallet:item.ewallet, amount: item.amount *  this.rate})),
-      complete_checkout_url: 'https://rapyd-flex.netlify.app',
-      cancel_checkout_url:'https://rapyd-flex.netlify.app',
-      // requested_currency: 'USD',
-      // merchant_reference_id: 'testReferenceId123',
-      // escrow: true,
-      // escrow_release_days: 2,
-    };
-    const data = await this.getData.fetchData(method, url , body);
-    const {redirect_url, id} = data.body.data;
-    await this.getData.saveCheckout(id);
-    document.location.href = redirect_url;
+    if(!this.disablePay){
+      const method = 'POST';
+      const url = this.getData.urlMethods.createCheckout();
+      const body = {
+        amount: this.getData.totalPrice ,
+        country: this.selectedCurrency.iso_alpha2,
+        currency: this.selectedCurrency.currency_code,
+        payment_method_type_categories:[this.selectedPayment.value],
+        ewallets: this.getData.paymentList.map((item:any) => ({ewallet:item.ewallet, amount: (item.amount *  this.rate).toFixed(2)})),
+        complete_checkout_url: 'https://rapyd-flex.netlify.app',
+        cancel_checkout_url:'https://rapyd-flex.netlify.app',
+        // requested_currency: 'USD',
+        // merchant_reference_id: 'testReferenceId123',
+        escrow: true,
+        escrow_release_days: 2,
+      };
+      const data = await this.getData.fetchData(method, url , body);
+      const {redirect_url, id} = data.body.data;
+      await this.getData.saveCheckout(id, 'pending', true, body);
+      document.location.href = redirect_url;
+    }
+
   }
 }

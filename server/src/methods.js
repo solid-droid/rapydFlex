@@ -30,6 +30,7 @@ const saveCheckout = async (params, body) => {
     if(record){
         if(!data.updateCart){
             data.cart = record.cart;
+            data.paymentDetails = record.paymentDetails;
         }
         delete data.updateCart;
         await table.checkOuts.findOneAndReplace({checkoutId:data.checkoutId}, data);

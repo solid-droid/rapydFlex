@@ -73,7 +73,7 @@ export class StoreComponent implements OnInit {
       productPrice: this.productPrice,
       productImage: this.productImage,
       productURL:this.productUrl,
-      sellerName: this.productName,
+      sellerName: this.sellerName,
       rapydWallet: this.rapydWallet,
       supportLink: this.supportLink,
       affiliatePercent:this.affiliatePercent,

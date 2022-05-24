@@ -45,6 +45,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   async loadShoppingCart(data:any){
     ////////CheckoutStatus///////////////
     this.getData.checkoutLoadingCompleted = false;
+    this.getData.showLoading = true;
     if(!data){
       data = {
         cart: [],
@@ -63,7 +64,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     for(let i =0; i<closedItems.length; i++){
       const checkout = await this.getData.getCheckout(closedItems[i].checkoutId);
       checkout.data.cart.forEach((item:any) => {
-        data.cart = data.cart.filter((cartItem:any) => cartItem.productCode !== item.productCode);
+        data.cart = data.cart.filter((cartItem:any) => !(cartItem.productCode == item.productCode && cartItem.recordTime == item.recordTime));
       });
     }
 
@@ -72,6 +73,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     ///////////////////////
      this.updatePayment();
     this.getData.checkoutLoadingCompleted = true;
+    this.getData.showLoading = false;
   }
 
   async deleteEntry(entry:any){

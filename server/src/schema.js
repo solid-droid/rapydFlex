@@ -38,6 +38,10 @@ const checkOuts = new mongoose.Schema({
     timestap:{
         type: Date,
         default: Date.now
+    },
+    paymentDetails:{
+        type: Object,
+        default: {}
     }
 });
 

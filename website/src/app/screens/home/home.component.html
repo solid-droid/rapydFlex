@@ -25,7 +25,7 @@
 </div>
 
 <div class="orderContainer" *ngIf="showPastOrders">
-    Past Orders
+    <app-past-orders></app-past-orders>
 </div>
 
 <div class="shopContainer" *ngIf="showShop">
@@ -36,3 +36,6 @@
 </p-sidebar>
 
 <app-login *ngIf="getData.showLogin"></app-login>
+<div id="LoadingMask" *ngIf="getData.showLoading">
+    Loading...
+</div>

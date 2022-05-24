@@ -1,5 +1,5 @@
 <div id="cartItemsContainer">
-  <div *ngIf="getData.cartData?.cart?.length || 0 === 0" style="margin:20px">
+  <div *ngIf="getData.cartData?.cart?.length === 0" style="margin:20px">
       Your Cart is Empty
   </div>
     <div class="cartItem" *ngFor="let item of getData?.cartData?.cart || []">

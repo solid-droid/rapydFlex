@@ -29,6 +29,7 @@ import {ButtonModule} from 'primeng/button';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider} from 'angularx-social-login';
 import {KeyFilterModule} from 'primeng/keyfilter';
+import { PastOrdersComponent } from './screens/past-orders/past-orders.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     HeaderComponent,
     PayDetailsPopupComponent,
     AnalyticsComponent,
+    PastOrdersComponent,
     
   ],
   imports: [

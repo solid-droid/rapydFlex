@@ -109,13 +109,22 @@ router.get('/store/:storeID', async (req, res) => {
 router.get('/connect', async (req,res)=>  await initFunction(res));
 
 async function initFunction(res = null) {
-  console.log('Connecting to Database');
-  mongoose.connect( process.env.MONGO_URI,() => {
+
+  if(mongoose.connection.readyState == 0){
+    console.log('Connecting to Database', mongoose.connection.readyState);
+    mongoose.connect( process.env.MONGO_URI,() => {
       console.log('connected to mongoDB');
       if(res){
           res.status(200).json({success: true, data: {}});
       }
-  });
+    });
+  } else {
+    console.log('Already connected to mongoDB');
+    if(res){
+      res.status(200).json({success: true, data: {}});
+  }
+  }
+ 
 }
 
 app.use('/.netlify/functions/api',router);

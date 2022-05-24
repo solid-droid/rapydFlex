@@ -71,6 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             sellerEmail: store.data.sellerEmail,
             sellerWalletIDs: [{wallet:store.data.rapydWallet, amount:store.data.productPrice, seller:true}],
             supportLink: store.data.supportLink,
+            recordTime: String(new Date())
           };
           if(affiliateWallet){
             newItem.sellerWalletIDs = [
@@ -87,9 +88,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Shop not found' });
       }
-
-
-    // await this.getData.saveCart(this.getData.cartData);
   }
 
 }

@@ -45,8 +45,16 @@
                     transform: scale(1.05);
                 }
             }
+            .disablePay{
+                background-color: #676975;
+                &:hover{
+                    background-color: #676975;
+                    transform: scale(1);
+                }
+            }
         }
     }
+
 }
 
 ::ng-deep{

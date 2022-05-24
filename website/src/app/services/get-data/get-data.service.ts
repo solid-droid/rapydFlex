@@ -13,6 +13,7 @@ export class GetDataService {
   cartData:any = undefined;
   checkoutLoadingCompleted = false;
   url = environment.backendUrl;
+  showLoading = true;
   body = {
     amount: 110,
     country: 'IN',
@@ -51,7 +52,8 @@ export class GetDataService {
   constructor() { }
 
   async fetchData(method:string, url:string, body={}){
-    return await(await fetch(this.url+'api',{
+    try{
+      return await(await fetch(this.url+'api',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -62,6 +64,10 @@ export class GetDataService {
             body
         }),
     })).json();
+    } catch(e){
+      console.log(e);
+    }
+
 }
 
   async getCart(email:string){
@@ -107,7 +113,7 @@ export class GetDataService {
     return await (await fetch(this.url+'store/'+shopID,)).json();
   }
 
-  async saveCheckout(checkoutId:string,status:string = 'pending' , updateCart = true){
+  async saveCheckout(checkoutId:string,status:string = 'pending' , updateCart = true , _body:any={}){
     if(updateCart){
       this.cartData.checkOuts.push({checkoutId, status: 'pending'});
       await this.saveCart(this.cartData);
@@ -117,6 +123,7 @@ export class GetDataService {
       userID:this.cartData.email,
       cart:this.cartData.cart,
       status,
+      paymentDetails:_body,
       updateCart
     };
     return await (await fetch(this.url+'checkout',{

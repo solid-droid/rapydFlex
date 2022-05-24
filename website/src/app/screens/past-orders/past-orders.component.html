@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="wrapper">
+        <div *ngFor="let item of checkouts" class="checkoutItem {{item.status == 'CLO' ? 'Success' : 'Failed'}}">
+            <div class="chekoutID">{{item.checkoutId}}</div>
+            <div class="header">
+                <div class="status {{item.status == 'CLO' ? 'Success' : 'Failed'}}">{{item.status == 'CLO' ? 'Success' : 'Failed'}}</div>
+                <div class="time">{{item.data.timestap}}</div>
+            </div>
+            <div class="cartBody">
+                <div class="cartItems">
+                    <div class="productHead">Products:</div>
+                    <div *ngFor="let product of item.data.cart" class="productDetails" >
+                        <div class="productName">{{product.productName}}</div>
+                    </div>
+                </div>
+                <div class="amount">
+                    <div class="currency">{{item.data.paymentDetails?.currency}}</div>
+                    <div class="total">{{item.data.paymentDetails?.amount}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
