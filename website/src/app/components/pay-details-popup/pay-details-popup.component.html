@@ -13,7 +13,7 @@
             >
             </p-dropdown>
         </div>
-        <div class="paymentContainer item">
+        <!-- <div class="paymentContainer item">
             <div class="label">
                 Select Payment Method:
             </div>
@@ -22,9 +22,9 @@
             [(ngModel)]="selectedPayment"
             optionLabel="name"> 
             </p-dropdown>
-        </div>
+        </div> -->
         <div class="payButtonContainer">
-            <div class="payButton {{disablePay ? 'disablePay':''}}" (click)="createRapydPayment()">
+            <div class="payButton {{disablePay ? 'disablePay':''}} {{getData.totalPriceUSD < 0.01 ? 'disablePay':''}} " (click)="createRapydPayment()">
                 Pay {{getData.totalPrice}} {{selectedCurrency?.currency_code}}
             </div>
         </div>

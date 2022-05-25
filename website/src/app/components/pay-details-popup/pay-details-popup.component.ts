@@ -11,13 +11,14 @@ export class PayDetailsPopupComponent implements OnInit,OnDestroy {
   selectedCurrency:any ;
   rate:any = 1;
   disablePay = false;
-  paymentOptions:any = [
-            {name:'Bank Transfer',value:'bank_transfer'},
-            {name:'E-wallet',value:'ewallet'},
-            {name:'Card',value:'card'},
-            {name:'Bank Redirect',value:'bank_redirect'}
-  ];
-  selectedPayment:any;
+  // paymentOptions:any = [
+  //           {name:'Bank Redirect',value:'bank_redirect'},
+  //           {name:'Bank Transfer',value:'bank_transfer'},
+  //           {name:'E-wallet',value:'ewallet'},
+  //           {name:'Card',value:'card'},
+  //           {name:'Bank Redirect',value:'bank_redirect'}
+  // ];
+  // selectedPayment:any;
   currency = 'USD';
   $subscription1:any;
   constructor(
@@ -61,14 +62,14 @@ export class PayDetailsPopupComponent implements OnInit,OnDestroy {
         amount: this.getData.totalPrice ,
         country: this.selectedCurrency.iso_alpha2,
         currency: this.selectedCurrency.currency_code,
-        payment_method_type_categories:[this.selectedPayment.value],
+        // payment_method_type_categories:[this.selectedPayment.value],
         ewallets: this.getData.paymentList.map((item:any) => ({ewallet:item.ewallet, amount: (item.amount *  this.rate).toFixed(2)})),
         complete_checkout_url: 'https://rapyd-flex.netlify.app',
         cancel_checkout_url:'https://rapyd-flex.netlify.app',
         // requested_currency: 'USD',
         // merchant_reference_id: 'testReferenceId123',
         escrow: true,
-        escrow_release_days: 2,
+        escrow_release_days: 30,
       };
       const data = await this.getData.fetchData(method, url , body);
       const {redirect_url, id} = data.body.data;
