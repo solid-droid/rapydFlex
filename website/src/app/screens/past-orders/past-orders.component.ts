@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GetDataService } from 'src/app/services/get-data/get-data.service';
 
 @Component({
@@ -6,13 +6,33 @@ import { GetDataService } from 'src/app/services/get-data/get-data.service';
   templateUrl: './past-orders.component.html',
   styleUrls: ['./past-orders.component.scss']
 })
-export class PastOrdersComponent implements OnInit {
+export class PastOrdersComponent implements OnInit, OnDestroy {
   checkouts:any = [];
+  $subscription1:any;
   constructor(
     private readonly getData: GetDataService,
   ) { }
+  ngOnDestroy() {
+      this.$subscription1?.unsubscribe();
+  }
 
   async ngOnInit() {
+    const _email = this.getData.getUser();
+    this.$subscription1 = this.getData.getLoginUser.subscribe(async (email:any) => {
+      if(email){
+        this.loadPastOrders();
+      }
+    })
+    if(_email){
+      
+    } else {
+      this.getData.showLoading = false;
+    }
+    
+  }
+
+
+ async loadPastOrders(){
     this.getData.showLoading = true;
     while(!this.getData.checkoutLoadingCompleted){
       await new Promise(r => setTimeout(r, 100));

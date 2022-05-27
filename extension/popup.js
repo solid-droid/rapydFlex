@@ -1,10 +1,22 @@
 let shoppingCart = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-// console.log(chrome);
-messageSubscription();
-loadShoppingCart();
-updateCartItems();
+
+  chrome.storage.sync.get(['email'], async (result) => {
+   if(result.email){
+    console.log('yes')
+   } else {
+     console.log('no');
+     chrome.tabs.create({ url: 'https://rapyd-flex.netlify.app/' });
+   }
+});
+  // chrome.runtime.sendMessage({type:'setUser'});   
+  
+
+
+    // messageSubscription();
+    // loadShoppingCart();
+    // updateCartItems();
 
 });
 
@@ -118,10 +130,10 @@ function showNotifications(){
  let opt = {
     iconUrl: "./icon4Inverted.png",
     type: 'basic',
-    title: 'Primary Title',
-    message: 'Primary message to display',
+    title: 'Items in your cart',
+    message: 'You have items in your cart',
     priority: 1,
-    buttons: [ { title: 'Yes'},{ title: 'No'}]
+    buttons: [ { title: 'Ok'}]
   }
 chrome.notifications.create('notificationId', opt, () => {});
 }
@@ -131,3 +143,4 @@ function messageSubscription(){
     console.log(request, sender, sendResponse);                                                                                                                                                           
   });
 }
+

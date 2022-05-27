@@ -115,7 +115,7 @@ export class GetDataService {
 
   async saveCheckout(checkoutId:string,status:string = 'pending' , updateCart = true , _body:any={}){
     if(updateCart){
-      this.cartData.checkOuts.push({checkoutId, status: 'pending'});
+      this.cartData.checkOuts.push({checkoutId, status: 'pending', timeStamp: String(new Date())});
       await this.saveCart(this.cartData);
     }
     const body = {

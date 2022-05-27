@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.getData.showLogin = false;
     } else {
       this.getData.showLogin = true;
+      this.getData.showLoading = false;
     }
 
 
@@ -54,12 +55,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       }
     }
     this.getData.cartData = data;
-    const pendingItems = data.checkOuts.filter((item:any) => item.status !== 'CLO');
-    for(let i =0; i<pendingItems.length; i++){
-      const checkout = await this.getData.getCheckoutStatus(pendingItems[i].checkoutId);
+    const pendingItems = data.checkOuts.filter((item:any) => {
+      const diff = Math.abs(new Date().getTime() - new Date(item.timeStamp).getTime()) / 3600000;
+      if(item.status !== 'CLO' && diff < 1){
+        return true
+      } else{
+        return false;
+      } 
+    });
+    const _resp = await Promise.all(pendingItems.map((item:any)=> this.getData.getCheckoutStatus(item.checkoutId)));
+    _resp.forEach((checkout:any , i:any) => {
       pendingItems[i].status = checkout.body.data.payment.status === 'CLO' ? 'CLO' : 'pending';
-      await this.getData.saveCheckout(pendingItems[i].checkoutId,pendingItems[i].status,false);
-    }
+      this.getData.saveCheckout(pendingItems[i].checkoutId,pendingItems[i].status,false);
+    });
     const closedItems = data.checkOuts.filter((item:any) => item.status === 'CLO');
     for(let i =0; i<closedItems.length; i++){
       const checkout = await this.getData.getCheckout(closedItems[i].checkoutId);
