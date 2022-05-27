@@ -49,7 +49,7 @@ export class GetDataService {
   private readonly Observable_route:any = new BehaviorSubject({type:null,id:null});
   getRoute = this.Observable_route.asObservable();
 
-  constructor() { }
+  constructor() {  }
 
   async fetchData(method:string, url:string, body={}){
     try{
@@ -79,14 +79,22 @@ export class GetDataService {
   }
 
   getUser(){
-    return localStorage.getItem('user');
+
+    const email:any = localStorage.getItem('user');
+    this.sendToExtension(email);
+    return email;
   }
 
+  async sendToExtension(email:string){
+    await new Promise(r => setTimeout(r,1000));
+    window.postMessage({ type: "FROM_PAGE", text: email }, "*");
+  }
   setRoute(type:any , id:any){
     this.Observable_route.next({type,id});
   }
   setUser(email:string){
     localStorage.setItem('user', email);
+    this.sendToExtension(email);
     this.Observable_loginUser.next(email);
   }
   async saveCart(cart:any){

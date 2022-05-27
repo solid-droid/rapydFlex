@@ -15,9 +15,9 @@
         <div style="font-size: 11px;font-weight: 400;padding-left: 3px;">All In One Checkout Experience</div>
       </div>
     </div>
-    <div style="display: flex;align-items: center;" title="Flex Store">
+    <!-- <div style="display: flex;align-items: center;" title="Flex Store">
       <img src="./store.png" class="walletIcon">
-    </div>
+    </div> -->
   </div>
   <div class="body">
       <div class="Menu">
@@ -26,12 +26,12 @@
           <div id="itemCount">0</div>
         </div>
         <div class="buttons">
-          <div title="Past Orders" class="syncContainer">
+          <div title="Past Orders"  id="pastOrdersButton" class="syncContainer">
             <img src="./pastOrders.png" class="pastOrderIcon">
           </div>
-          <div title="Sync with other devices" class="syncContainer">
+          <!-- <div title="Sync with other devices" class="syncContainer">
             <img src="./sync.png" class="syncIcon">
-          </div>
+          </div> -->
         </div>
 
 
@@ -43,8 +43,13 @@
   </div>
   <div class="footer">
       <div class="payButton">
-        <div class="payButtonText">Pay 23,000 INR</div>
+        <div id="payTotalButton" class="payButtonText">Pay 23,000 INR</div>
       </div>
+  </div>
+  <div id="loginMask">
+    <button type="button" id="signInButton" class="login-with-google-btn" >
+      Sign in with Google
+    </button>
   </div>
   <script src="jquery.min.js"></script>
   <script src="popup.js"></script>
