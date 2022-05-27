@@ -8,8 +8,11 @@ window.addEventListener("message", (event) => {
       return;
     }
   
-    if (event.data.type && (event.data.type == "FROM_PAGE")) {
-      const email = event.data.text;
-        chrome.storage.sync.set({'email': email});
+    if (event.data.type && (event.data.type == "rapydFlex")) {
+      const email = event?.data?.email;
+      //CHECK IF EMAIL IS VALID
+        if(email.includes('@')){
+            chrome.storage.sync.set({'email': email});
+        }
     }
   }, false);

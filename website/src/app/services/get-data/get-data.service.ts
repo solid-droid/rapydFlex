@@ -87,7 +87,7 @@ export class GetDataService {
 
   async sendToExtension(email:string){
     await new Promise(r => setTimeout(r,1000));
-    window.postMessage({ type: "FROM_PAGE", text: email }, "*");
+    window.postMessage({ type: "rapydFlex", email }, "*");
   }
   setRoute(type:any , id:any){
     this.Observable_route.next({type,id});
