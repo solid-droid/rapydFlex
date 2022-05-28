@@ -19,7 +19,7 @@ export class RoutingControlComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.$subscription1 = this.route.params.subscribe((params:any) => {
-      this.getData.setRoute(params.type, params.id);
+      this.getData.setRoute(params.type, params.id, params.wallet);
     });
   }
 

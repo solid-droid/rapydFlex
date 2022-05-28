@@ -5,8 +5,8 @@ import { RoutingControlComponent } from './components/routing-control/routing-co
 const routes: Routes = [
   { path: '', component: RoutingControlComponent },
   { path: ':type', component: RoutingControlComponent },
-  { path: 'shop/:id', component: RoutingControlComponent },
-  { path: 'shop/:id/:wallet', component: RoutingControlComponent },
+  { path: ':type/:id', component: RoutingControlComponent },
+  { path: ':type/:id/:wallet', component: RoutingControlComponent },
 ];
 
 

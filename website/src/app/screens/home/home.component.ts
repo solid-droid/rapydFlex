@@ -37,15 +37,16 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.showPastOrders = true;
           this.showShop = false;
         }
-
-      } else {
-        this.showCart = true;
-        this.showPastOrders = false;
-        this.showShop = false;
-        if(route.id){
-         
-          this.updateCart(route.id , route.wallet);
+        if(route.type === 'shop'){
+          this.showCart = true;
+          this.showPastOrders = false;
+          this.showShop = false;
+          if(route.id){
+            console.log(route);
+            this.updateCart(route.id , route.wallet);
+          }
         }
+        
       }
     });
   }

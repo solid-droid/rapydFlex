@@ -94,8 +94,8 @@ export class GetDataService {
     }
 
   }
-  setRoute(type:any , id:any){
-    this.Observable_route.next({type,id});
+  setRoute(type:any , id:any=undefined, wallet:any = undefined){
+    this.Observable_route.next({type,id, wallet});
   }
   setUser(email:string){
     localStorage.setItem('user', email);
