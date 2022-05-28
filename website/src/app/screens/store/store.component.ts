@@ -15,7 +15,7 @@ export class StoreComponent implements OnInit {
   ) { }
 
   url = '';
-  defaultUrl = 'https://rapid-flex.netlify.app/shop/';
+  defaultUrl = 'https://rapyd-flex.netlify.app/shop/';
   id:any = null;
 
   productName = '';
