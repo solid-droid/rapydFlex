@@ -12,7 +12,7 @@
         "http://*/*"
     ],
     "externally_connectable": {
-        "matches": ["https://*.localhost:4200/*","https://*.rapyd-flex.netlify.app/*"]
+        "matches": ["https://localhost:4200/*","https://*.rapyd-flex.netlify.app/*"]
       },
     "action": {
         "default_popup": "popup.html",
