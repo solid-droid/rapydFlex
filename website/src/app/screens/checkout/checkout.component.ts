@@ -85,7 +85,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   async deleteEntry(entry:any){
-    this.getData.cartData.cart = this.getData.cartData.cart.filter((item:any) => item.id !== entry.id);
+    this.getData.cartData.cart = this.getData.cartData.cart.filter((item:any) => item.productCode !== entry.productCode);
     this.updatePayment();
     await this.getData.saveCart(this.getData.cartData);
   }

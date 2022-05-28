@@ -24,7 +24,7 @@ export class PastOrdersComponent implements OnInit, OnDestroy {
       }
     })
     if(_email){
-      
+      this.loadPastOrders();
     } else {
       this.getData.showLoading = false;
     }

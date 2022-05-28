@@ -81,13 +81,18 @@ export class GetDataService {
   getUser(){
 
     const email:any = localStorage.getItem('user');
-    this.sendToExtension(email);
+    // this.sendToExtension(email);
     return email;
   }
 
   async sendToExtension(email:string){
-    await new Promise(r => setTimeout(r,1000));
-    window.postMessage({ type: "rapydFlex", email }, "*");
+    try{
+      await new Promise(r => setTimeout(r,1000));
+      window.postMessage({ type: "rapydFlex", email }, "*");
+    } catch(e){
+      console.log(e);
+    }
+
   }
   setRoute(type:any , id:any){
     this.Observable_route.next({type,id});
