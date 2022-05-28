@@ -74,8 +74,8 @@ function updateCartItems(){
                     <div class="shippingDetails">
                       <div class="shippingIncluded">
                       Shipping Included 
-                      // <div class="currency">USD</div>
-                      // <div class="price">0</div>
+                      <!-- <div class="currency">USD</div> -->
+                      <!-- <div class="price">0</div> -->
                       </div>
                     </div>
                 </div>
