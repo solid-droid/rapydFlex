@@ -87,4 +87,8 @@ export class StoreComponent implements OnInit {
     this.id = store.data._id;
     this.url = this.defaultUrl + this.id;
   }
+
+  openUrl(){
+    window.open(this.url, '_blank');
+  }
 }
